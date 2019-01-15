@@ -6,44 +6,40 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot;
-import edu.wpi.first.wpilibj.*;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-
 import com.ctre.phoenix.motorcontrol.can.*;
+import edu.wpi.first.wpilibj.*;
 /**
  * Add your docs here.
  */
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 public class DriveTrain {
+    XboxController controller;
 
-    WPI_TalonSRX talon1;
     WPI_TalonSRX talon2;
     WPI_TalonSRX talon3;
-    WPI_TalonSRX talon4;
+    WPI_TalonSRX talon5;
+    WPI_TalonSRX talon6;
+
     DifferentialDrive drive;
-    XboxController xbox;
 
-    DriveTrain()
-    {
-        talon1 = new WPI_TalonSRX(2);  //Left forward
-        talon2 = new WPI_TalonSRX(3);  //left backward
-        talon3 = new WPI_TalonSRX(5);  //right forward
-        talon4 = new WPI_TalonSRX(6);  //right backward
+    DriveTrain () {
+        talon2 = new WPI_TalonSRX(2);
+        talon3 = new WPI_TalonSRX(3);
+        talon5 = new WPI_TalonSRX(5);
+        talon6 = new WPI_TalonSRX(6);
 
-       talon1.set(com.ctre.phoenix.motorcontrol.ControlMode.Follower, talon1.getDeviceID());
-       talon3.set(com.ctre.phoenix.motorcontrol.ControlMode.Follower, talon3.getDeviceID());
+        controller = new XboxController(0);
+        talon3.set(com.ctre.phoenix.motorcontrol.ControlMode.Follower,talon2.getDeviceID());
 
-       drive = new DifferentialDrive(talon1, talon3);
+        talon5.set(com.ctre.phoenix.motorcontrol.ControlMode.Follower,talon6.getDeviceID());
 
-       xbox = new XboxController(0);
+        drive = new DifferentialDrive(talon2, talon6);
     }
+    public void teleopDrive(){
+      
+        double speed = (controller.getY(edu.wpi.first.wpilibj.GenericHID.Hand.kLeft)) * -.6;
+        double rotation = (controller.getX(edu.wpi.first.wpilibj.GenericHID.Hand.kRight)) * .6;
 
-    public void teleopDrive()
-    {
-
-        double rotation = (xbox.getX(edu.wpi.first.wpilibj.GenericHID.Hand.kRight)) * .6;
-        double speed = (xbox.getY(edu.wpi.first.wpilibj.GenericHID.Hand.kLeft)) * 0.6;
         drive.arcadeDrive(speed, rotation);
-        
-
     }
 }
