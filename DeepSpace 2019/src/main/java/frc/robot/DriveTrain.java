@@ -15,25 +15,25 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 public class DriveTrain {
     XboxController controller;
 
-    WPI_TalonSRX talon2;
+    WPI_TalonSRX talon1;
     WPI_TalonSRX talon3;
-    WPI_TalonSRX talon5;
-    WPI_TalonSRX talon6;
+    WPI_TalonSRX talon2;
+    WPI_TalonSRX talon4;
 
     DifferentialDrive drive;
 
     DriveTrain () {
+        talon1 = new WPI_TalonSRX(1);
         talon2 = new WPI_TalonSRX(2);
         talon3 = new WPI_TalonSRX(3);
-        talon5 = new WPI_TalonSRX(5);
-        talon6 = new WPI_TalonSRX(6);
+        talon4 = new WPI_TalonSRX(4);
 
         controller = new XboxController(0);
-        talon3.set(com.ctre.phoenix.motorcontrol.ControlMode.Follower,talon2.getDeviceID());
+        talon1.set(com.ctre.phoenix.motorcontrol.ControlMode.Follower,talon3.getDeviceID());
 
-        talon5.set(com.ctre.phoenix.motorcontrol.ControlMode.Follower,talon6.getDeviceID());
+        talon2.set(com.ctre.phoenix.motorcontrol.ControlMode.Follower,talon4.getDeviceID());
 
-        drive = new DifferentialDrive(talon2, talon6);
+        drive = new DifferentialDrive(talon3, talon4);
     }
     public void teleopDrive(){
       
