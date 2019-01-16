@@ -23,10 +23,10 @@ public class DriveTrain {
     DifferentialDrive drive;
 
     DriveTrain () {
-        talon1 = new WPI_TalonSRX(1);
-        talon2 = new WPI_TalonSRX(2);
-        talon3 = new WPI_TalonSRX(3);
-        talon4 = new WPI_TalonSRX(4);
+        talon1 = new WPI_TalonSRX(4); //2 on power up
+        talon2 = new WPI_TalonSRX(11); //3 on power up
+        talon3 = new WPI_TalonSRX(7); // 5 on power up
+        talon4 = new WPI_TalonSRX(10); // 6 on power up
 
         controller = new XboxController(0);
         talon1.set(com.ctre.phoenix.motorcontrol.ControlMode.Follower,talon3.getDeviceID());
@@ -37,7 +37,7 @@ public class DriveTrain {
     }
     public void teleopDrive(){
       
-        double speed = (controller.getY(edu.wpi.first.wpilibj.GenericHID.Hand.kLeft)) * -.6;
+        double speed = (controller.getY(edu.wpi.first.wpilibj.GenericHID.Hand.kLeft)) * 0.6;
         double rotation = (controller.getX(edu.wpi.first.wpilibj.GenericHID.Hand.kRight)) * .6;
 
         drive.arcadeDrive(speed, rotation);
