@@ -26,7 +26,7 @@ public class Robot extends TimedRobot {
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
   DriveTrain drive = new DriveTrain();
   
-  private XboxController xbox;
+  XboxController xbox;
   Compressor mainC;
   Pneumatics pn;
 
